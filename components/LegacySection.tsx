@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 
-export const LegacySection: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+export const LegacySection: React.FC<{ onComplete: () => void; onBack: () => void }> = ({ onComplete, onBack }) => {
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -55,12 +55,23 @@ export const LegacySection: React.FC<{ onComplete: () => void }> = ({ onComplete
             className="w-full glass rounded-full px-6 py-4 text-slate-100 focus:outline-none focus:ring-1 ring-slate-700 transition-all"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full py-4 bg-slate-100 text-slate-900 rounded-full font-bold hover:bg-white transition-all shadow-xl shadow-white/5 active:scale-95"
-        >
-          نقش الأثر
-        </button>
+        
+        <div className="flex flex-col gap-4">
+          <button
+            type="submit"
+            className="w-full py-4 bg-slate-100 text-slate-900 rounded-full font-bold hover:bg-white transition-all shadow-xl shadow-white/5 active:scale-95"
+          >
+            نقش الأثر
+          </button>
+          
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-full py-4 glass rounded-full text-slate-400 hover:text-white transition-all active:scale-95 text-sm"
+          >
+            تراجع عن النقش
+          </button>
+        </div>
       </form>
     </div>
   );

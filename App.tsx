@@ -50,6 +50,15 @@ const App: React.FC = () => {
     setState(AppState.INTRO);
   };
 
+  const goBackFromLegacy = () => {
+    // نعود للواجهة الأساسية إذا لم تكن هناك حكمة، أو لواجهة الحكمة إذا كانت موجودة
+    if (wisdom) {
+      setState(AppState.REVELATION);
+    } else {
+      setState(AppState.INTRO);
+    }
+  };
+
   return (
     <Layout dynamicColor={wisdom?.moodColor}>
       {error && (
@@ -83,7 +92,7 @@ const App: React.FC = () => {
       )}
 
       {state === AppState.LEGACY && (
-        <LegacySection onComplete={reset} />
+        <LegacySection onComplete={reset} onBack={goBackFromLegacy} />
       )}
 
       {(state === AppState.INTRO || state === AppState.REVELATION) && (

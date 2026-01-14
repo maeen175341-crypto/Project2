@@ -20,9 +20,9 @@ const WISDOM_SCHEMA = {
 const CONTEMPLATION_SCHEMA = {
   type: Type.OBJECT,
   properties: {
-    surfaceMeaning: { type: Type.STRING, description: "Simple explanation of the words." },
-    deepMeaning: { type: Type.STRING, description: "The philosophical depth and hidden wisdom." },
-    practicalApplication: { type: Type.STRING, description: "How to apply this wisdom in modern life." }
+    surfaceMeaning: { type: Type.STRING, description: "A simple, clear explanation of the wisdom in plain Arabic." },
+    deepMeaning: { type: Type.STRING, description: "A brief, powerful insight into why this wisdom matters." },
+    practicalApplication: { type: Type.STRING, description: "One simple way to act on this wisdom today." }
   },
   required: ["surfaceMeaning", "deepMeaning", "practicalApplication"],
 };
@@ -32,7 +32,6 @@ const CONTEMPLATION_SCHEMA = {
  */
 const findLocalWisdom = (input: string): Wisdom | null => {
   const normalizedInput = input.toLowerCase();
-  // كلمات مفتاحية بسيطة للربط السريع
   const matches = WISDOM_REPOSITORY.filter(w => 
     normalizedInput.includes(w.category?.toLowerCase() || '') ||
     w.text.includes(normalizedInput) ||
@@ -40,23 +39,18 @@ const findLocalWisdom = (input: string): Wisdom | null => {
   );
   
   if (matches.length > 0) {
-    // اختيار حكمة عشوائية من المتطابقات لضمان التنوع
     return matches[Math.floor(Math.random() * matches.length)];
   }
   return null;
 };
 
 export const summonWisdom = async (userInput: string): Promise<Wisdom> => {
-  // المسار السريع: محاولة إيجاد حكمة محلية أولاً (استجابة فورية)
   const localMatch = findLocalWisdom(userInput);
   if (localMatch) {
-    // تأخير بسيط لمحاكاة "التفكير" البصري دون إبطاء حقيقي
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 600));
     return localMatch;
   }
 
-  // المسار العادي: استخدام الذكاء الاصطناعي (بدون أدوات بحث خارجية لزيادة السرعة)
-  // تم إزالة googleSearch لأنه المسبب الرئيسي للبطء
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
     contents: `
@@ -75,16 +69,19 @@ export const summonWisdom = async (userInput: string): Promise<Wisdom> => {
     const textOutput = response.text || '{}';
     return JSON.parse(textOutput) as Wisdom;
   } catch (error) {
-    // في حال فشل الـ AI، نعود للمستودع المحلي كخيار آمن وسريع
     return WISDOM_REPOSITORY[Math.floor(Math.random() * WISDOM_REPOSITORY.length)];
   }
 };
 
 export const contemplateWisdom = async (wisdom: Wisdom): Promise<Contemplation> => {
-  // تقليل حجم البرومبت لزيادة سرعة التوليد
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
-    contents: `Examine: "${wisdom.text}" by ${wisdom.author}. Provide JSON: surfaceMeaning, deepMeaning, practicalApplication (in Arabic).`,
+    contents: `
+      Examine: "${wisdom.text}" by ${wisdom.author}. 
+      Provide a SIMPLIFIED and EASY to understand explanation in Arabic. 
+      Avoid complex philosophical terms. Speak directly to the heart and mind.
+      Return JSON: surfaceMeaning (شرح مبسط), deepMeaning (الجوهر), practicalApplication (نصيحة عملية).
+    `,
     config: {
       responseMimeType: "application/json",
       responseSchema: CONTEMPLATION_SCHEMA,
@@ -94,6 +91,6 @@ export const contemplateWisdom = async (wisdom: Wisdom): Promise<Contemplation> 
   try {
     return JSON.parse(response.text || '{}') as Contemplation;
   } catch (error) {
-    throw new Error("تعذر سبر أغوار هذه الحكمة الآن.");
+    throw new Error("تعذر تبسيط هذه الحكمة الآن.");
   }
 };
