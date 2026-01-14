@@ -16,10 +16,14 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onSubmit }) => {
 
   return (
     <div className="flex flex-col items-center justify-center text-center space-y-12 animate-slow-fade">
-      <h1 className="text-4xl md:text-5xl font-light text-white tracking-tight leading-relaxed">
-        اكتب ما أثقل فكرك... <br />
-        <span className="text-slate-400 text-3xl">ودع الحكمة تجيبك.</span>
-      </h1>
+      <div className="space-y-4">
+        <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-tight">
+          اكتب شعورك..
+        </h1>
+        <p className="text-slate-400 text-2xl md:text-3xl font-light">
+          وخذ حكمة تناسبك
+        </p>
+      </div>
       
       <div className="w-full max-w-lg relative group">
         <textarea
@@ -27,13 +31,13 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onSubmit }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="عبّر عن حالتك هنا..."
-          className="w-full bg-transparent border-b border-slate-700 p-4 text-2xl text-center text-white focus:outline-none focus:border-white transition-all placeholder:text-slate-600 placeholder:italic resize-none min-h-[120px]"
+          placeholder="ما الذي يجول في خاطرك الآن؟"
+          className="w-full bg-transparent border-b border-slate-800 p-4 text-2xl text-center text-white focus:outline-none focus:border-wisdom-gold transition-all placeholder:text-slate-700 placeholder:italic resize-none min-h-[120px]"
         />
-        <div className="absolute -bottom-10 left-0 right-0 text-slate-400 text-sm opacity-0 group-focus-within:opacity-100 transition-opacity flex justify-center items-center gap-2">
+        <div className="absolute -bottom-10 left-0 right-0 text-slate-500 text-sm opacity-0 group-focus-within:opacity-100 transition-opacity flex justify-center items-center gap-2 font-light">
           اضغط 
-          <kbd className="px-2 py-1 bg-slate-800 rounded text-xs border border-slate-700 text-white">Enter</kbd>
-          للاستحضار
+          <kbd className="px-2 py-1 bg-slate-900 rounded text-xs border border-slate-800 text-slate-300">Enter</kbd>
+          لاستحضار الحكمة
         </div>
       </div>
     </div>
