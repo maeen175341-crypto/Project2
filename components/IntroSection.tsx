@@ -15,29 +15,36 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center text-center space-y-12 animate-slow-fade">
-      <div className="space-y-4">
-        <h1 className="text-4xl md:text-6xl font-light text-white tracking-tight leading-tight">
+    <div className="flex flex-col items-center justify-center text-center space-y-16 animate-slow-fade max-w-2xl w-full">
+      <div className="space-y-6">
+        <h1 className="quote-font text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight text-glow">
           اكتب شعورك..
         </h1>
-        <p className="text-slate-400 text-2xl md:text-3xl font-light">
+        <p className="text-slate-400 text-xl md:text-2xl font-light tracking-wide">
           وخذ حكمة تناسبك
         </p>
       </div>
       
-      <div className="w-full max-w-lg relative group">
+      <div className="w-full relative group px-4">
         <textarea
           autoFocus
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="ما الذي يجول في خاطرك الآن؟"
-          className="w-full bg-transparent border-b border-slate-800 p-4 text-2xl text-center text-white focus:outline-none focus:border-wisdom-gold transition-all placeholder:text-slate-700 placeholder:italic resize-none min-h-[120px]"
+          placeholder="ما الذي يفيض به قلبك الآن؟"
+          className="w-full bg-transparent border-b border-slate-800/50 py-6 text-2xl md:text-3xl text-center text-white focus:outline-none focus:border-wisdom-gold/50 transition-all duration-700 placeholder:text-slate-800 placeholder:italic resize-none min-h-[100px] font-light"
         />
-        <div className="absolute -bottom-10 left-0 right-0 text-slate-500 text-sm opacity-0 group-focus-within:opacity-100 transition-opacity flex justify-center items-center gap-2 font-light">
-          اضغط 
-          <kbd className="px-2 py-1 bg-slate-900 rounded text-xs border border-slate-800 text-slate-300">Enter</kbd>
-          لاستحضار الحكمة
+        
+        <div className="mt-8 flex flex-col items-center gap-4 opacity-0 group-focus-within:opacity-100 transition-all duration-1000 delay-300 translate-y-2 group-focus-within:translate-y-0">
+          <button 
+            onClick={() => input.trim() && onSubmit(input)}
+            className="px-10 py-3 rounded-full border border-white/5 hover:border-white/20 hover:bg-white/5 text-slate-400 hover:text-white transition-all text-sm tracking-widest font-light"
+          >
+            استحضار الحكمة
+          </button>
+          <span className="text-slate-700 text-[10px] uppercase tracking-[0.2em]">
+            أو اضغط Enter
+          </span>
         </div>
       </div>
     </div>
