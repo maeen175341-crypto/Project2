@@ -43,7 +43,7 @@ export const WisdomCard: React.FC<WisdomCardProps> = ({ wisdom, onContemplate, o
         <div className="absolute top-0 left-0 w-full h-full rounded-[2.5rem] opacity-5 pointer-events-none bg-gradient-to-br from-white to-transparent" />
         
         <div className="relative space-y-12 text-center">
-          <p className="quote-font text-4xl md:text-6xl font-bold leading-[1.4] text-slate-50 text-glow px-4">
+          <p className="quote-font text-4xl md:text-6xl font-bold leading-[1.4] text-white text-glow px-4">
             « {wisdom.text} »
           </p>
           
@@ -52,7 +52,7 @@ export const WisdomCard: React.FC<WisdomCardProps> = ({ wisdom, onContemplate, o
               — {wisdom.author}
             </h3>
             <div className="h-px w-16 bg-slate-700 mx-auto opacity-50" />
-            <p className="text-base text-slate-400 font-light italic">
+            <p className="text-base text-slate-300 font-light italic">
               من {wisdom.source}
             </p>
           </div>
@@ -62,13 +62,13 @@ export const WisdomCard: React.FC<WisdomCardProps> = ({ wisdom, onContemplate, o
       <div className="flex flex-wrap justify-center gap-6">
         <button
           onClick={onContemplate}
-          className="px-12 py-5 bg-slate-50 text-slate-900 rounded-full font-bold hover:bg-white hover:scale-105 transition-all flex items-center gap-3 shadow-xl shadow-white/5 active:scale-95"
+          className="px-12 py-5 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 hover:scale-105 transition-all flex items-center gap-3 shadow-xl shadow-white/5 active:scale-95"
         >
           <span className="text-xl">💡 تأمل الحكمة</span>
         </button>
         <button
           onClick={onReset}
-          className="px-12 py-5 glass-bright rounded-full text-slate-200 hover:text-white hover:bg-white/10 transition-all active:scale-95"
+          className="px-12 py-5 glass-bright rounded-full text-white hover:bg-white/10 transition-all active:scale-95 border border-white/10"
         >
           حالة أخرى
         </button>

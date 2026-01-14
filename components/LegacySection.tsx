@@ -10,7 +10,7 @@ export const LegacySection: React.FC<{ onComplete: () => void; onBack: () => voi
     e.preventDefault();
     if (!content || !author) return;
     setSubmitted(true);
-    // In a real app, we would write to Firebase Firestore here
+    // محاكاة حفظ البيانات في مستودع الحكمة
     setTimeout(() => {
       onComplete();
     }, 3000);
@@ -22,17 +22,28 @@ export const LegacySection: React.FC<{ onComplete: () => void; onBack: () => voi
         <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto">
           <div className="w-3 h-3 bg-emerald-500 rounded-full animate-ping" />
         </div>
-        <h3 className="text-2xl text-slate-200">أثرك قيد الموازنة...</h3>
-        <p className="text-slate-500">ستعرض حكمتك في سحابة الحكمة بعد مراجعة جوهرها.</p>
+        <h3 className="text-2xl text-white">أثرك قيد الموازنة...</h3>
+        <p className="text-slate-400 font-light">ستعرض حكمتك في سحابة الحكمة بعد مراجعة جوهرها من قبل الحكماء.</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-xl mx-auto space-y-8 animate-slow-fade">
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl text-slate-200 font-light">تخليد الأثر</h2>
-        <p className="text-slate-500">أضف حكمة تؤمن بها ليقرأها السائرون من بعدك.</p>
+    <div className="w-full max-w-xl mx-auto space-y-8 animate-slow-fade relative">
+      {/* زر الرجوع العلوي */}
+      <div className="absolute -top-16 right-0 w-full flex justify-start">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-slate-400 hover:text-white transition-all group"
+        >
+          <span className="text-2xl transition-transform group-hover:translate-x-1">→</span>
+          <span className="text-sm font-light tracking-wide">عودة للبداية</span>
+        </button>
+      </div>
+
+      <div className="text-center space-y-2 pt-4">
+        <h2 className="text-3xl text-white font-light">تخليد الأثر</h2>
+        <p className="text-slate-400 font-light">أضف حكمة تؤمن بها ليقرأها السائرون من بعدك في هذا المنبر.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -42,7 +53,7 @@ export const LegacySection: React.FC<{ onComplete: () => void; onBack: () => voi
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="اكتب هنا جوهر فكرك..."
-            className="w-full glass rounded-2xl p-6 text-xl text-slate-100 min-h-[150px] focus:outline-none focus:ring-1 ring-slate-700 transition-all resize-none"
+            className="w-full glass rounded-2xl p-6 text-xl text-white min-h-[180px] focus:outline-none focus:ring-1 ring-white/20 transition-all resize-none placeholder:text-slate-600"
           />
         </div>
         <div className="space-y-2">
@@ -52,24 +63,16 @@ export const LegacySection: React.FC<{ onComplete: () => void; onBack: () => voi
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="اسمك أو توقيعك الفلسفي"
-            className="w-full glass rounded-full px-6 py-4 text-slate-100 focus:outline-none focus:ring-1 ring-slate-700 transition-all"
+            className="w-full glass rounded-full px-6 py-4 text-white focus:outline-none focus:ring-1 ring-white/20 transition-all placeholder:text-slate-600"
           />
         </div>
         
-        <div className="flex flex-col gap-4">
+        <div className="pt-4">
           <button
             type="submit"
-            className="w-full py-4 bg-slate-100 text-slate-900 rounded-full font-bold hover:bg-white transition-all shadow-xl shadow-white/5 active:scale-95"
+            className="w-full py-4 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition-all shadow-xl shadow-white/5 active:scale-95"
           >
-            نقش الأثر
-          </button>
-          
-          <button
-            type="button"
-            onClick={onBack}
-            className="w-full py-4 glass rounded-full text-slate-400 hover:text-white transition-all active:scale-95 text-sm"
-          >
-            تراجع عن النقش
+            نقش الأثر في السحابة
           </button>
         </div>
       </form>
